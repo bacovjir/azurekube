@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: azurekube 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: azurekube 
+    spec:
+      containers:
+        - name: azurekube 
+          image: jbrepo.azurecr.io/azurekube
+          ports:
+          - containerPort: 8080
