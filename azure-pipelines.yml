@@ -31,10 +31,17 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: Maven@2
+    - task: Maven@3
       displayName: Maven build
       inputs:
-        goals: 'clean package'
+        mavenPomFile: 'pom.xml'
+        mavenOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.11'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: false
+        testResultsFiles: '**/TEST-*.xml'
+        goals: 'package'
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
