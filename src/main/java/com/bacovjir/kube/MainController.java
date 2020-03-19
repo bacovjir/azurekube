@@ -26,6 +26,10 @@ public class MainController {
 		return "I`am ready";
 	}
 	
+	@GetMapping("/readinesprobe")
+	public String version() {
+		return "v02";
+	}
 	
 	Map<String, String> data = new HashMap<String, String>();
 
