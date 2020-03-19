@@ -23,7 +23,7 @@ public class DataServiceImpl implements DataService {
 
 	@Override
 	public List<DataDto> findData() {
-		DataDto[] datas = restTemplate.getForObject("http://azurekube", DataDto[].class);
+		DataDto[] datas = restTemplate.getForObject("/api/data", DataDto[].class);
 		return Arrays.asList(datas);
 	}
 
