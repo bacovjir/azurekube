@@ -25,7 +25,7 @@ public class MainController {
 
 	@GetMapping("/data")
 	public List<String> listData() {
-		return new ArrayList(data.keySet());
+		return new ArrayList(data.values());
 	}
 
 	@PostMapping("/data")
