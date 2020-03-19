@@ -29,24 +29,27 @@ public class DataServiceImpl implements DataService {
 
 	@Override
 	public String ping(String hostname) {
-		try
-	    {
-	        InetAddress inet = InetAddress.getByName(hostname);
-	        boolean status = inet.isReachable(5000);
-	        if (status) {
-	        	log.info(inet.getHostName() + " Host Reached\t" + inet.getHostAddress());
-	        	return "Reachable";
-	        } else {
-	        	log.info(inet.getHostName() + " Host Unreachable");
-	            return "Unreachable";
-	        }
-
-	    } catch (UnknownHostException e) {
-	        log.error(e.getMessage() + " Can't Reach Host");
-	        return e.getMessage() + " Can't Reach Host";
-	    } catch (IOException e) {
-	    	log.error(e.getMessage() + " Error in reaching the Host");
-	        return e.getMessage() + " Error in reaching the Host";
-	    }
+//		try {
+//	        InetAddress inet = InetAddress.getByName(hostname);
+//	        boolean status = inet.isReachable(5000);
+//	        if (status) {
+//	        	log.info(inet.getHostName() + " Host Reached\t" + inet.getHostAddress());
+//	        	return "Reachable";
+//	        } else {
+//	        	log.info(inet.getHostName() + " Host Unreachable");
+//	            return "Unreachable";
+//	        }
+//
+//	    } catch (UnknownHostException e) {
+//	        log.error(e.getMessage() + " Can't Reach Host");
+//	        return e.getMessage() + " Can't Reach Host";
+//	    } catch (IOException e) {
+//	    	log.error(e.getMessage() + " Error in reaching the Host");
+//	        return e.getMessage() + " Error in reaching the Host";
+//	    }
+		
+		
+		DataDto[] datas = restTemplate.getForObject(hostname+"/api/data", DataDto[].class);
+		return "length = " + datas.length;
 	}
 }
