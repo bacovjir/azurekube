@@ -1,4 +1,4 @@
-package com.bacovjir.kube;
+package com.bacovjir.kube.controller;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -9,19 +9,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bacovjir.kube.dto.Version;
+import com.bacovjir.kube.integration.DataService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 public class MainController {
+
+	@Autowired
+	private DataService dataService;
 
 	private InetAddress ip;
 	private String hostname;
@@ -50,7 +56,7 @@ public class MainController {
 	
 	@GetMapping("/version")
 	public Version version() {
-		return Version.builder().version("v01").hostname(hostname).ip(ip.getHostAddress()).build();
+		return Version.builder().version("v02").hostname(hostname).ip(ip.getHostAddress()).build();
 	}
 	
 	Map<String, String> data = new HashMap<String, String>();
@@ -72,6 +78,11 @@ public class MainController {
 	@GetMapping("/")
 	public String index() {
 		return "kube";
+	}
+
+	@GetMapping("/ping")
+	public String ping(@RequestParam(name = "hostname", required = true) String hostname) {
+		return dataService.ping(hostname);
 	}
 
 }
