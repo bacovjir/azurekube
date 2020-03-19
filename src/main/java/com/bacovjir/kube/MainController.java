@@ -21,6 +21,12 @@ public class MainController {
 		return new Date().toString();
 	}
 	
+	@GetMapping("/readinesprobe")
+	public String readinesprobe() {
+		return "I`am ready";
+	}
+	
+	
 	Map<String, String> data = new HashMap<String, String>();
 
 	@GetMapping("/data")
