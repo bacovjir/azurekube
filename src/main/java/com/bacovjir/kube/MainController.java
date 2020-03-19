@@ -1,5 +1,7 @@
 package com.bacovjir.kube;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,8 +15,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bacovjir.kube.dto.Version;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class MainController {
+
+	private InetAddress ip;
+	private String hostname;
+
+    
+	public MainController() {
+	    try {
+		  ip = InetAddress.getLocalHost();
+		  hostname = ip.getHostName();
+		  log.info("Your current IP address : " + ip); 
+		  log.info("Your current Hostname : " + hostname);
+	    } catch (UnknownHostException e) {
+	    	log.error("Cannot get IP and host: " + e.getMessage());
+	    }
+	}
 
 	@GetMapping("/hello")
 	public String hello() {
@@ -27,8 +49,8 @@ public class MainController {
 	}
 	
 	@GetMapping("/version")
-	public String version() {
-		return "v03";
+	public Version version() {
+		return Version.builder().version("v01").hostname(hostname).ip(ip.getHostAddress()).build();
 	}
 	
 	Map<String, String> data = new HashMap<String, String>();
