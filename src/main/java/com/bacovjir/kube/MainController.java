@@ -26,7 +26,7 @@ public class MainController {
 		return "I`am ready";
 	}
 	
-	@GetMapping("/readinesprobe")
+	@GetMapping("/version")
 	public String version() {
 		return "v02";
 	}
