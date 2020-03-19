@@ -28,7 +28,7 @@ public class MainController {
 	
 	@GetMapping("/version")
 	public String version() {
-		return "v02";
+		return "v03";
 	}
 	
 	Map<String, String> data = new HashMap<String, String>();
