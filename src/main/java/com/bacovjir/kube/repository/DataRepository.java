@@ -11,7 +11,8 @@ import com.bacovjir.kube.dto.DataDto;
 
 import lombok.extern.slf4j.Slf4j;
 
-@FeignClient(name = "azurekubebackend", fallback = DataRepositoryFallback.class)
+//https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html
+@FeignClient(name = "azurekubebackend", url = "${feign.azurekubebackend.url}", fallback = DataRepositoryFallback.class)
 public interface DataRepository {
 
 	@GetMapping("/api/data")

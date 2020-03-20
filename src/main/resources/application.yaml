@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: azurekube
+        
+feign:
+  azurekubebackend:
+    url: http://localhost:8099
+  hystrix:
+    enabled: true #enable feign client falback
